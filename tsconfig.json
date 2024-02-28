@@ -1,0 +1,25 @@
+{
+   "exclude": ["node_modules", "build"],
+   "include": ["./*", "./config/*.json"],
+   "compilerOptions": {
+      "outDir": "./build/",
+      "target": "ES6", // 어떤 버전의 JS코드로 컴파일 할지 지정
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "esModuleInterop": true, // 라이브러리 중 commonJS로 동작하기 위한 상호운용적으로 하기 위한 설정
+      "resolveJsonModule": true, // TS파일에서 json import 허용
+      "removeComments": true, // TS파일내 존재하는 주석 제거 후 컴파일
+      "experimentalDecorators": true, // TS @Decorator를 사용하기 위해
+      "emitDecoratorMetadata": true, // @Decorator를 위한 유형 메타데이터 방출 실험 기능 지원 설정
+      "allowJs": true, // TS에서 JS파일도 사용할 수 있도록 하는 설정
+      "baseUrl": ".", // import 구문의 모듈해석 시 기준이 되는 경로를 지정
+      "typeRoots": ["./node_modules/@types", "./@types", "./utils/interfaces/index.d.ts"],
+      "paths": {
+         "*": ["@types/*"]
+      }
+   },
+   "ts-node": {
+      "files": true,
+      "require": ["tsconfig-paths/register"]
+   }
+}
