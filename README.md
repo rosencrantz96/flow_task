@@ -4,10 +4,10 @@
 
 ### commit convention
 
-- fix: for bug fixes<br>
-- feat: for new features<br>
-- docs: for documentation changes<br>
-- style: code formatting, whitespace modifications, or improvements to code style<br>
-- refactor: for code refactoring<br>
-- test: for adding or modifying tests<br>
+- fix: for bug fixes
+- feat: for new features
+- docs: for documentation changes
+- style: code formatting, whitespace modifications, or improvements to code style
+- refactor: for code refactoring
+- test: for adding or modifying tests
 - chore: for updates to dependencies, configuration changes, or modifications to build scripts.
