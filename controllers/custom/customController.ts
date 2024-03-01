@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { IRequestBody } from '../../utils/interfaces';
+import { IRequestBody, IParams } from '../../utils/interfaces/index';
 
 import CustomExtension from './../../models/customExtension';
 import FixedExtension from '../../models/fixedExtension';
@@ -85,6 +85,34 @@ export const getExtension = async (req: Request, res: Response) => {
     console.error(error);
     res.status(500).json({
       message: 'Fail To Get Extension',
+      success: false,
+    });
+  }
+};
+
+export const deleteExtension = async (req: Request, res: Response) => {
+  try {
+    const { extId }: IParams = req.params;
+
+    // 확장자 검증
+    const isExist: CustomExtension = await CustomExtension.findOne({
+      where: { id: extId },
+    });
+    if (!isExist)
+      return res.status(404).json({
+        message: 'Extension Not Found',
+        success: false,
+      });
+
+    await isExist.destroy();
+    res.status(200).json({
+      message: 'Successfully Delete Extension',
+      success: true,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Fail To Delete Extension',
       success: false,
     });
   }
