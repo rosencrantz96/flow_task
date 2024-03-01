@@ -5,6 +5,7 @@ import fs from 'fs';
 
 import routes from './routes';
 import db from './models';
+import { initExtension } from './controllers/init/initController';
 
 const app: Express = express();
 dotenv.config();
@@ -17,9 +18,10 @@ app.use(express.urlencoded({ limit: '1mb', extended: false }));
 
 const connectToDB = async () => {
   try {
-    await db.sequelize.sync({ force: false });
+    await db.sequelize.sync({ force: true });
     if (!fs.existsSync('./upload/'))
       fs.mkdirSync('./upload/', { recursive: true });
+    await initExtension();
   } catch (error) {
     console.log(error);
   }
