@@ -38,7 +38,7 @@ jobs:
           npm run build
 
       - name: zip distributions
-        run: zip -r flow.zip ./
+        run: zip -r flow.zip ./ ./appspec.yml ./scripts
 
       - name: AWS configure credentials
         uses: aws-actions/configure-aws-credentials@v1
