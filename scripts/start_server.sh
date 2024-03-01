@@ -11,6 +11,6 @@ else
     echo "file Exist"
 fi
 
-/home/ubuntu/.nvm/versions/node/v18.17.0/bin/pm2 restart $SERVER_NAME
+/home/ubuntu/.npm-global/bin/pm2 restart $SERVER_NAME
 
-/home/ubuntu/.nvm/versions/node/v18.17.0/bin/pm2 list
+/home/ubuntu/.npm-global/bin/pm2 list
