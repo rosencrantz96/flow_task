@@ -5,6 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>main</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      function handelCheckBoxClick (extId, checkboxElement) {
+        const isChecked = checkboxElement.checked;
+        axios.patch(`/api/fixed/checked/${extId}`, { isChecked })
+          .then(respose => {
+            console.log("Updated successfully!");
+          })
+          .catch(error => {
+            console.error(error);
+          })
+      }
+      function addCustomExtension (extName) {
+        axios.post(`/api/custom/create`, { extName })
+          .then(respose => {
+            console.log("Created successfully!");
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      }
+    </script>
   </head>
   <body>
     <h1>◎ 파일 확장자 차단</h1>
@@ -12,22 +34,29 @@
     <span>
       파일확장자에 따라 특정 형식의 파일을 첨부하거나 전송하지 못하도록 제한
     </span>
-    <form>
-      <table>
-        <tbody>
+    <table>
+      <tbody>
+        <form action="/api/fixed/" method="get">
           <tr>
             <th style="width: 100px; text-align: left">고정확장자</th>
             <td>
-              <input type="checkbox" /> bat <input type="checkbox" /> cmd
-              <input type="checkbox" /> com <input type="checkbox" /> cpl
-              <input type="checkbox" /> exe <input type="checkbox" /> scr
-              <input type="checkbox" /> js
+              <% for(let i=0; i<allFixedExtension.allExtension.length; i++) {%>
+              <input 
+                type="checkbox" 
+                id="<%= allFixedExtension.allExtension[i] %>.extId" 
+                name="allExtension" 
+                onclick="handelCheckBoxClick(`<%= allFixedExtension.allExtension[i].extId %>`, this)" 
+                <%= allFixedExtension.allExtension[i].isChecked ? 'checked' : '' %>
+                /> 
+                <%= allFixedExtension.allExtension[i].extName %>
+              <% }%>
             </td>
           </tr>
+        </form>
           <tr>
             <th style="width: 100px; text-align: left">커스텀확장자</th>
             <td>
-              <input type="text" placeholder="확장자 입력" />
+              <input type="text" placeholder="확장자 입력" id="extName" />
               <input
                 type="button"
                 value="+추가"
@@ -37,29 +66,33 @@
                   border: grey;
                   border-radius: 5px;
                 "
+                onclick="addCustomExtension(extName.value)"
               />
             </td>
           </tr>
-          <tr>
-            <th style="width: 100px"></th>
-            <td>
-              <div
-                style="
-                  border: 1px solid black;
-                  border-radius: 5px;
-                  min-width: 300px;
-                  min-height: 300px;
-                "
-              >
-                <div style="margin: 3px 3px 0px 3px; color: gray">
-                  <span style="color: gray"></span>/200
+          <form action="/api/custom/" method="get">
+            <tr>
+              <th style="width: 100px"></th>
+              <td>
+                <div
+                  style="
+                    border: 1px solid black;
+                    border-radius: 5px;
+                    min-width: 300px;
+                    min-height: 300px;
+                  "
+                >
+                  <div style="margin: 3px 3px 0px 3px; color: gray">
+                    <span style="color: gray"></span>/200
+                  </div>
+                  <% for (let i=0; i<allCustomExtension.allExtension.length; i++) { %>
+                    <div style="margin-top: 5px"><%= allCustomExtension.allExtension[i].extName %></div>
+                  <% }%>
                 </div>
-                <div style="margin-top: 5px"></div>
-              </div>
-            </td>
-          </tr>
+              </td>
+            </tr>
+          </form>
         </tbody>
       </table>
-    </form>
   </body>
 </html>
