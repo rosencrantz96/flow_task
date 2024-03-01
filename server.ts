@@ -18,7 +18,7 @@ app.use(express.urlencoded({ limit: '1mb', extended: false }));
 
 const connectToDB = async () => {
   try {
-    await db.sequelize.sync({ force: true });
+    await db.sequelize.sync({ force: false });
     if (!fs.existsSync('./upload/'))
       fs.mkdirSync('./upload/', { recursive: true });
     await initExtension();
