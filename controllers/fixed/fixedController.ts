@@ -45,3 +45,32 @@ export const isChecked = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const getExtension = async (req: Request, res: Response) => {
+  try {
+    const getExtension: FixedExtension[] = await FixedExtension.findAll({
+      attributes: ['id', 'ext_name', 'is_checked'],
+      order: [['id', 'ASC']],
+    });
+
+    const allExtension = getExtension.map((item) => {
+      return {
+        extId: item.id,
+        extName: item.ext_name,
+        isChecked: item.is_checked,
+      };
+    });
+
+    res.status(200).json({
+      allExtension,
+      message: 'Successfully Get ALL Extensions',
+      success: true,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Fail To Get Extension',
+      success: false,
+    });
+  }
+};
