@@ -55,5 +55,5 @@ jobs:
           aws deploy create-deployment \
           --application-name flow-task \
           --deployment-config-name CodeDeployDefault.OneAtATime \
-          --deployment-group-name flow \
+          --deployment-group-name flow-new \
           --s3-location bucket=flowtaskbucket,bundleType=zip,key=flow/flow.zip \
