@@ -3,5 +3,6 @@ export interface IParams {
 }
 
 export interface IRequestBody {
-  isChecked: boolean;
+  isChecked?: boolean;
+  extName?: string;
 }
