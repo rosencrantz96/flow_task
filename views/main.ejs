@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>main</title>
+  </head>
+  <body>
+    <h1>◎ 파일 확장자 차단</h1>
+    <hr />
+    <span>
+      파일확장자에 따라 특정 형식의 파일을 첨부하거나 전송하지 못하도록 제한
+    </span>
+    <form>
+      <table>
+        <tbody>
+          <tr>
+            <th style="width: 100px; text-align: left">고정확장자</th>
+            <td>
+              <input type="checkbox" /> bat <input type="checkbox" /> cmd
+              <input type="checkbox" /> com <input type="checkbox" /> cpl
+              <input type="checkbox" /> exe <input type="checkbox" /> scr
+              <input type="checkbox" /> js
+            </td>
+          </tr>
+          <tr>
+            <th style="width: 100px; text-align: left">커스텀확장자</th>
+            <td>
+              <input type="text" placeholder="확장자 입력" />
+              <input
+                type="button"
+                value="+추가"
+                style="
+                  background-color: gray;
+                  color: white;
+                  border: grey;
+                  border-radius: 5px;
+                "
+              />
+            </td>
+          </tr>
+          <tr>
+            <th style="width: 100px"></th>
+            <td>
+              <div
+                style="
+                  border: 1px solid black;
+                  border-radius: 5px;
+                  min-width: 300px;
+                  min-height: 300px;
+                "
+              >
+                <div style="margin: 3px 3px 0px 3px; color: gray">
+                  <span style="color: gray"></span>/200
+                </div>
+                <div style="margin-top: 5px"></div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </body>
+</html>
