@@ -1,5 +1,6 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
+import axios from 'axios';
 import cors from 'cors';
 import fs from 'fs';
 
@@ -34,8 +35,12 @@ app.use('/api', routes);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.get('/', function (req, res) {
-  res.render('main.ejs');
+app.get('/', async function (req, res) {
+  const response1 = await axios.get('http://localhost:8081/api/fixed/');
+  const allFixedExtension = response1.data;
+  const response2 = await axios.get('http://localhost:8081/api/custom/');
+  const allCustomExtension = response2.data;
+  res.render('main.ejs', { allFixedExtension, allCustomExtension });
 });
 
 app.listen(8081, () => {
