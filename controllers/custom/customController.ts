@@ -6,7 +6,26 @@ import FixedExtension from '../../models/fixedExtension';
 
 export const createExtension = async (req: Request, res: Response) => {
   try {
-    const { extName }: IRequestBody = req.body;
+    let { extName }: IRequestBody = req.body;
+
+    // 확장자에 내용이 없거나 빈칸인 경우 제한
+    extName.trim();
+    if (extName.length === 0)
+      return res.status(400).json({
+        message: 'Invalid Input: extName must not be empty or blank',
+        success: false,
+      });
+
+    // 데이터 영문 소문자 제한
+    const regex = /^[a-z]+$/;
+    extName = extName.toLowerCase();
+
+    if (!regex.test(extName))
+      return res.status(400).json({
+        message:
+          'Invalid Input: extName must be lowercase alphabets without spaces',
+        success: false,
+      });
 
     // 글자수 제한
     if (extName.length > 20)
