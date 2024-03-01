@@ -1,5 +1,5 @@
 #!/bin/bash
-SERVER_NAME=flow
+SERVER_NAME=flow-task
 FILE=/home/ubuntu/flow/.npm
 
 cd flow/
