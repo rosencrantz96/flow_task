@@ -1,0 +1,28 @@
+{
+  "type": "flow_task",
+  "msg": "fixedExtension",
+  "status": "success",
+  "data": [
+    {
+      "ext_name": "bat"
+    },
+    {
+      "ext_name": "cmd"
+    },
+    {
+      "ext_name": "com"
+    },
+    {
+      "ext_name": "cpl"
+    },
+    {
+      "ext_name": "exe"
+    },
+    {
+      "ext_name": "scr"
+    },
+    {
+      "ext_name": "js"
+    }
+  ]
+}
