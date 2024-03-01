@@ -2,7 +2,7 @@
 SERVER_NAME=flow
 FILE=/home/ubuntu/flow/.npm
 
-cd flow
+cd flow/
 
 if ! test -e $FILE; then
     echo "file does not Exist"
