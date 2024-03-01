@@ -1,8 +1,13 @@
 import { Router } from 'express';
 
-import { createExtension } from '../controllers/custom/customController';
+import {
+  createExtension,
+  getExtension,
+} from '../controllers/custom/customController';
 
 const router = Router();
+
+router.get('/', getExtension);
 
 router.post('/create', createExtension);
 
