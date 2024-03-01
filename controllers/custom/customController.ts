@@ -68,6 +68,7 @@ export const getExtension = async (req: Request, res: Response) => {
       order: [['id', 'DESC']],
     });
 
+    // 카멜 케이스로 변환
     const allExtension = getExtension.map((item) => {
       return {
         extId: item.id,
