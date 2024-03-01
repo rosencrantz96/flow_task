@@ -21,6 +21,17 @@
         axios.post(`/api/custom/create`, { extName })
           .then(respose => {
             console.log("Created successfully!");
+            location.reload();
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      }
+      function deleteCustomExtension (extId) {
+        axios.delete(`/api/custom/delete/${extId}`)
+          .then(response => {
+            console.log("Deleted successfully!");
+            location.reload();
           })
           .catch(error => {
             console.error(error)
@@ -56,15 +67,18 @@
           <tr>
             <th style="width: 100px; text-align: left">커스텀확장자</th>
             <td>
-              <input type="text" placeholder="확장자 입력" id="extName" />
+              <input type="text" placeholder="확장자 입력" id="extName" style="padding: 5px; border: 1px solid black; border-radius: 5px;"/>
               <input
                 type="button"
                 value="+추가"
                 style="
+                  margin: 5px; 
+                  padding: 5px;
                   background-color: gray;
                   color: white;
                   border: grey;
                   border-radius: 5px;
+                  cursor: pointer;
                 "
                 onclick="addCustomExtension(extName.value)"
               />
@@ -79,14 +93,19 @@
                     border: 1px solid black;
                     border-radius: 5px;
                     min-width: 300px;
+                    max-width: 400px;
                     min-height: 300px;
+                    /* overflow: auto; */
                   "
                 >
                   <div style="margin: 3px 3px 0px 3px; color: gray">
-                    <span style="color: gray"></span>/200
+                    <span style="color: gray"><%= allCustomExtension.count%></span>/200
                   </div>
                   <% for (let i=0; i<allCustomExtension.allExtension.length; i++) { %>
-                    <div style="margin-top: 5px"><%= allCustomExtension.allExtension[i].extName %></div>
+                    <div style="margin: 5px; padding: 5px; border: 1px solid black; border-radius: 5px; display: inline-block;">
+                      <%= allCustomExtension.allExtension[i].extName %>
+                      <button style="font-weight: bold; background-color: white; border: none; cursor: pointer;" onclick="deleteCustomExtension(`<%= allCustomExtension.allExtension[i].extId %>`)">X</button>
+                    </div>
                   <% }%>
                 </div>
               </td>
