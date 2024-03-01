@@ -97,7 +97,6 @@ export const getExtension = async (req: Request, res: Response) => {
 
     // 전체 커스텀 확장자 숫자
     const countExtension: number = await CustomExtension.count();
-    console.log(countExtension);
 
     res.status(200).json({
       allExtension,
