@@ -1,4 +1,4 @@
-name: flow_task
+name: flow_deploy
 
 on:
   pull_request:
@@ -53,7 +53,7 @@ jobs:
       - name: deploy with AWS codeDeploy
         run: |
           aws deploy create-deployment \
-          --application-name flow-task \
+          --application-name flow \
           --deployment-config-name CodeDeployDefault.OneAtATime \
-          --deployment-group-name flow-new \
-          --s3-location bucket=flowtaskbucket,bundleType=zip,key=flow/flow.zip \
+          --deployment-group-name flow-group \
+          --s3-location bucket=flowbucket,bundleType=zip,key=flow/flow.zip \
