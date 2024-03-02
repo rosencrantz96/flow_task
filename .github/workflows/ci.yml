@@ -48,7 +48,7 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./flow.zip s3://flowbucket/flow/
+        run: aws s3 cp --region ap-northeast-2 ./flow.zip s3://flowbucket/last-flow/
 
       - name: deploy with AWS codeDeploy
         run: |
@@ -56,4 +56,4 @@ jobs:
           --application-name flow-application \
           --deployment-config-name CodeDeployDefault.AllAtOnce \
           --deployment-group-name deploy-group \
-          --s3-location bucket=flowbucket,bundleType=zip,key=flow/flow.zip \
+          --s3-location bucket=flowbucket,bundleType=zip,key=last-flow/flow.zip \
