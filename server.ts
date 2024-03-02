@@ -35,7 +35,20 @@ app.use('/api', routes);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.get('/', async function (req, res) {
+app.get('/health', (req, res) => {
+  try {
+    res.status(200).json({
+      message: 'Health Check Okay',
+      uptime: process.uptime(),
+      date: new Date(),
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500);
+  }
+});
+
+app.get('/main', async function (req, res) {
   const response1 = await axios.get('http://localhost:8081/api/fixed/');
   const allFixedExtension = response1.data;
   const response2 = await axios.get('http://localhost:8081/api/custom/');

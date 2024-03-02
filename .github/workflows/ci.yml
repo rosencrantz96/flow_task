@@ -1,0 +1,59 @@
+name: flow_task
+
+on:
+  pull_request:
+    branches: [dev]
+  push:
+    branches: [dev]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: Checkout source code.
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: create env file
+        working-directory: ./
+        run: |
+          touch .env
+          cat << EOF >> .env
+          ${{ secrets.ENV }}
+          EOF
+
+      - name: Install dependencies
+        working-directory: ./
+        run: |
+          npm install && npm install --save-dev typescript@^4.5.4
+          npm run build
+
+      - name: zip distributions
+        run: zip -r flow.zip ./ ./appspec.yml ./scripts
+
+      - name: AWS configure credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: upload to S3
+        run: aws s3 cp --region ap-northeast-2 ./flow.zip s3://flowtaskbucket/flow/
+
+      - name: deploy with AWS codeDeploy
+        run: |
+          aws deploy create-deployment \
+          --application-name flow-task \
+          --deployment-config-name CodeDeployDefault.OneAtATime \
+          --deployment-group-name flow-new \
+          --s3-location bucket=flowtaskbucket,bundleType=zip,key=flow/flow.zip \
