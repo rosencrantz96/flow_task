@@ -48,7 +48,7 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./flow.zip s3://last-flow/
+        run: aws s3 cp --region ap-northeast-2 ./flow.zip s3://last-flow
 
       - name: deploy with AWS codeDeploy
         run: |
