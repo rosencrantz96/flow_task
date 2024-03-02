@@ -56,4 +56,4 @@ jobs:
           --application-name flow-application \
           --deployment-config-name CodeDeployDefault.AllAtOnce \
           --deployment-group-name deploy-group \
-          --s3-location bucket=flowbucket,bundleType=zip,key=last-flow/flow.zip \
+          --s3-location bucket=flowbucket,bundleType=zip,key=last-flow/flow-ec2.zip \
