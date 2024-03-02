@@ -38,7 +38,7 @@ jobs:
           npm run build
 
       - name: zip distributions
-        run: zip -r flow-ec2.zip ./ ./appspec.yml ./scripts
+        run: zip -r flow.zip ./ ./appspec.yml ./scripts
 
       - name: AWS configure credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -56,4 +56,4 @@ jobs:
           --application-name flow-application \
           --deployment-config-name CodeDeployDefault.AllAtOnce \
           --deployment-group-name deploy-group \
-          --s3-location bucket=last-flow,bundleType=zip,key=flow/flow-ec2.zip \
+          --s3-location bucket=last-flow,bundleType=zip,key=flow/flow.zip \
