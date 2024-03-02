@@ -53,7 +53,7 @@ jobs:
       - name: deploy with AWS codeDeploy
         run: |
           aws deploy create-deployment \
-          --application-name flow \
-          --deployment-config-name CodeDeployDefault.OneAtATime \
-          --deployment-group-name flow-group \
+          --application-name flow-application \
+          --deployment-config-name CodeDeployDefault.AllAtOnce \
+          --deployment-group-name deploy-group \
           --s3-location bucket=flowbucket,bundleType=zip,key=flow/flow.zip \
