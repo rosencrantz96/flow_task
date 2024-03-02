@@ -1,6 +1,6 @@
 #!/bin/bash
 SERVER_NAME=flow
-FILE=/home/ubuntu/last-flow/flow/.npm
+FILE=/home/ubuntu/last-flow/.npm
 
 cd flow/
 
