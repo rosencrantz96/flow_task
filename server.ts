@@ -36,11 +36,16 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get('/health', (req, res) => {
-  res.status(200).json({
-    message: 'Health Check Okay',
-    uptime: process.uptime(),
-    date: new Date(),
-  });
+  try {
+    res.status(200).json({
+      message: 'Health Check Okay',
+      uptime: process.uptime(),
+      date: new Date(),
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500);
+  }
 });
 
 app.get('/main', async function (req, res) {
