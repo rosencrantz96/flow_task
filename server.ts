@@ -35,7 +35,7 @@ app.use('/api', routes);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.get('/', async function (req, res) {
+app.get('/main', async function (req, res) {
   const response1 = await axios.get('http://localhost:8081/api/fixed/');
   const allFixedExtension = response1.data;
   const response2 = await axios.get('http://localhost:8081/api/custom/');
