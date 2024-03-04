@@ -1,4 +1,4 @@
-name: flow_task
+name: flow_deploy
 
 on:
   pull_request:
@@ -48,12 +48,12 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./flow.zip s3://flowtaskbucket/flow/
+        run: aws s3 cp --region ap-northeast-2 ./flow.zip s3://last-flow/
 
       - name: deploy with AWS codeDeploy
         run: |
           aws deploy create-deployment \
-          --application-name flow-task \
-          --deployment-config-name CodeDeployDefault.OneAtATime \
-          --deployment-group-name flow-new \
-          --s3-location bucket=flowtaskbucket,bundleType=zip,key=flow/flow.zip \
+          --application-name flow-application \
+          --deployment-config-name CodeDeployDefault.AllAtOnce \
+          --deployment-group-name deploy-group \
+          --s3-location bucket=last-flow,bundleType=zip,key=flow/flow.zip \
