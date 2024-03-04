@@ -54,6 +54,6 @@ jobs:
         run: |
           aws deploy create-deployment \
           --application-name flow-application \
-          --deployment-config-name CodeDeployDefault.AllAtOnce \
+          --deployment-config-name CodeDeployDefault.OneAtATime \
           --deployment-group-name deploy-group \
           --s3-location bucket=last-flow,bundleType=zip,key=flow.zip \
