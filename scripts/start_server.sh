@@ -1,8 +1,6 @@
 #!/bin/bash
 SERVER_NAME=flow
-FILE=/home/ubuntu/last-flow/.npm
-
-cd last-flow/
+FILE=/home/ubuntu/.npm
 
 if ! test -e $FILE; then
     echo "file does not Exist"
